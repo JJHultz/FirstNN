@@ -28,21 +28,17 @@ for layer in range(layerCount):
                 i = 1
                 inputSize = 784
                 while i <= inputSize:
-                    if i != inputSize:
-                        line = line + str((random.randint(0,10)/10-0.5)*2*maxWeightValue) + ','
-                    else:
-                        line = line + str((random.randint(0,10)/10-0.5)*2*maxWeightValue)
+                    line = line + str((random.randint(0,10)/10-0.5)*2*maxWeightValue) + ','
                     i += 1
-                line = line + 'perceptronSeparator'
+                line = line[:-1] + 'perceptronSeparator'
                 previousLayerOutputItems = inputSize
             else:
                 i = 1
                 while i <= previousLayerOutputItems:
-                    if i != previousLayerOutputItems:
-                        line = line + str((random.random()-0.5)*2*maxWeightValue) + ','
-                    else:
-                        line = line + str((random.random()-0.5)*2*maxWeightValue)
+                    line = line + str((random.randint(0,10)/10-0.5)*2*maxWeightValue) + ','
                     i += 1
+                line = line[:-1] + 'perceptronSeparator'
+
 
     else:
         print('Still a work in progress!')
