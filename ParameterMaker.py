@@ -29,9 +29,9 @@ for layer in range(layerCount):
                 inputSize = 784
                 while i <= inputSize:
                     if i != inputSize:
-                        line = line + str((random.random()-0.5)*2*maxWeightValue) + ','
+                        line = line + str((random.randint(0,10)/10-0.5)*2*maxWeightValue) + ','
                     else:
-                        line = line + str((random.random()-0.5)*2*maxWeightValue)
+                        line = line + str((random.randint(0,10)/10-0.5)*2*maxWeightValue)
                     i += 1
                 line = line + 'perceptronSeparator'
                 previousLayerOutputItems = inputSize
@@ -45,6 +45,8 @@ for layer in range(layerCount):
                     i += 1
 
     else:
+        print('Still a work in progress!')
+        input('Please press CTRL+C to exit the program')
         weight = int(input('Enter the base value for weight: '))
         bias = int(input('Enter the base value for bias: '))
         for parameter in range(perceptronCount):
