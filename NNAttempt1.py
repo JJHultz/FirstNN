@@ -7,8 +7,11 @@ def ReLUActivation(z):
         return 0
 
 def runNetwork(inputData):
-    temporaryInput = [inputData[1:]]
+    #print(inputData)
+    temporaryInput = inputData[1:]
+    #print(temporaryInput)
     temporaryOutput = []
+    layerID = 0
     for layer in parametersIn:
         layer = layer.strip('\n').split('perceptronSeparator')
         #print(layer[0])
@@ -25,22 +28,26 @@ def runNetwork(inputData):
             for weight in range(len(layer[perceptron][1:])):
                 #print(layer[perceptron][weight], inputData[inputDataIndex])
                 try:
-                    #print(type(layer[perceptron][weight]), type(temporaryInput[inputDataIndex]))
+                    #print(type(float(layer[perceptron][weight]))) 
+                    #print(type(temporaryInput[inputDataIndex]))
                     #print(temporaryInput)
-                    z += float(layer[perceptron][weight]) * temporaryInput[0][inputDataIndex]
+                    z += float(layer[perceptron][weight]) * temporaryInput[inputDataIndex]
                     #print('z complete')
-                    if weight % 1000 == 0:
-                        print('loading...')
+                    #if weight % 1000 == 0:
+                    #    print('loading...')
                 except:
                     print('Error: ', 'layer:', layer, 'perceptron:', perceptron, 'weight:', weight, 'Input Data Index:', inputDataIndex)
                     print(layer[perceptron][weight], temporaryInput[inputDataIndex])
             temporaryOutput.append(ReLUActivation(z))
             inputDataIndex += 1
-            if layer == len(parametersIn) - 1:
-                print('Output: ', temporaryOutput)
-                print('True Label: ', trueLabel)
-                print('Loss: ', (temporaryOutput.index(max(temporaryOutput)) + 1) - trueLabel)
-                print(' ')
+
+        if layerID == 1:
+            print('Output: ', temporaryOutput.index(max(temporaryOutput)))
+            print('True Label: ', trueLabel)
+            print('Loss: ', (temporaryOutput.index(max(temporaryOutput)) - trueLabel))
+            print(' ')
+        else:
+            layerID += 1
     #print(temporaryOutput)
 
 # layerOneParameters = [[[0.9, 1],[0.4, -1],[0.3, 2],[-1, 0],[1.4, 4]],[[0.1, 4],[0.9, 0],[0.2, -5],[-4, 10],[3, 1]]]
@@ -76,6 +83,4 @@ while keepRunning:
             print(batchIndex)
             keepRunning = False
             break
-        else:
-            continue
         
