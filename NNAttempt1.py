@@ -10,15 +10,16 @@ def runNetwork(inputData):
     #print(inputData)
     temporaryInput = inputData[1:]
     #print(temporaryInput)
-    temporaryOutput = []
     layerID = 0
     for layer in parametersIn:
+        temporaryOutput = []
         layer = layer.strip('\n').split('perceptronSeparator')
         #print(layer[0])
         #print(type(layer[0]))
         for perceptron in range(len(layer)):
             layer[perceptron] = layer[perceptron].split(',')
         trueLabel = int(inputData[0])
+        #print('True Label: ', trueLabel)
         for perceptron in range(len(layer)):
             if temporaryOutput != []:
                 temporaryInput = temporaryOutput
@@ -40,18 +41,15 @@ def runNetwork(inputData):
                     print(layer[perceptron][weight], temporaryInput[inputDataIndex])
             temporaryOutput.append(ReLUActivation(z))
             inputDataIndex += 1
-
-        if layerID == 1:
+        if layerID == 1 or True:
             print('Output: ', temporaryOutput.index(max(temporaryOutput)))
             print('True Label: ', trueLabel)
             print('Loss: ', (temporaryOutput.index(max(temporaryOutput)) - trueLabel))
             print(' ')
         else:
             layerID += 1
-    #print(temporaryOutput)
+        print(temporaryOutput)
 
-# layerOneParameters = [[[0.9, 1],[0.4, -1],[0.3, 2],[-1, 0],[1.4, 4]],[[0.1, 4],[0.9, 0],[0.2, -5],[-4, 10],[3, 1]]]
-# runLayer(inputData)
 
 parameterset = 'testseed3'+'.txt'
 
@@ -83,4 +81,3 @@ while keepRunning:
             print(batchIndex)
             keepRunning = False
             break
-        
